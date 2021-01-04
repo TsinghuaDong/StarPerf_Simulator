@@ -21,6 +21,7 @@ pycharm
 *.ins
 *.log
 *.out
+*.mat
 __pycache__
 starlink
 oneweb

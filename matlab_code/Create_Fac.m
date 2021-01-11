@@ -10,8 +10,14 @@ for i=1:No_fac
     lat=Lat(i);
     long=Long(i);
     info_facility=strcat('Scenario/Matlab_Basic/Facility/',info_facility);
-    stkSetFacPosLLA(info_facility, [lat*pi/180; long*pi/180; 0]);
-    stkConnect(conid,'SetConstraint',info_facility,'ElevationAngle Min 20');
+    stkSetFacPosLLA(info_facility, [lat*pi/180; long*pi/180; 0]); % 添加了四个地面设施
+    % USAGE    stkSetFacPosLLA('facPath', llaPos)
+ 
+    % facPath - Valid facility class path, may be obtained from stkObjNames.
+    % llaPos  - Geodetic lat, long, alt position (3x1, [rad; rad; meters]),
+    %           or use the local terrain altitude by specifying
+    %           lat, long only (2x1, [rad; rad]).
+    stkConnect(conid,'SetConstraint',info_facility,'ElevationAngle Min 20'); % Basic constraint里面有20度仰角
     num_fac(i)=i;
     
 end

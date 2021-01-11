@@ -1,4 +1,4 @@
-function [ delay ] = Create_delay(position_cbf,time, inc)
+function [ delay ] = Create_delay(position_cbf,time, inc) % time是时槽
 % Calculate delay between LEOs and facilities
 % input:
 %   position_cbf: used to connect to STK
@@ -10,7 +10,7 @@ function [ delay ] = Create_delay(position_cbf,time, inc)
     delay = zeros(No_fac+No_leo,No_fac+No_leo);
     %calculate the distance and delay between leo and others(include leo)
     no = No_leo/leo_plane;
-    for i=1:leo_plane
+    for i=1:leo_plane % 算的是每颗卫星同轨道上一颗和右侧轨道的卫星之间的距离和时延。
         for j=1:no
             cur_leo = (i-1)*no+j;
             if j ~= no
@@ -38,7 +38,7 @@ function [ delay ] = Create_delay(position_cbf,time, inc)
             delay(right_leo,cur_leo) = delay(cur_leo,right_leo);
         end
     end
-    for i = 1:No_leo  
+    for i = 1:No_leo  % 算的是每个fac和所有卫星之间的距离。不会击穿地球？
         for j = No_leo + 1:No_fac+No_leo
             distance(i,j) = sqrt((position_cbf{i,1}(1,time) - position_cbf{j,1}(1,time))^2 + (position_cbf{i,1}(2,time) - position_cbf{j,1}(2,time))^2 + (position_cbf{i,1}(3,time) - position_cbf{j,1}(3,time))^2);
             distance(j,i) = distance(i,j);

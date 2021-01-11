@@ -28,7 +28,7 @@ cmd1 = [cmd1 ' 0.1'];
 rtn = stkConnect(conid,'Animate','Scenario/Matlab_Basic',cmd1);
 rtn = stkConnect(conid,'Animate','Scenario/Matlab_Basic','Reset');
 disp('Set up the propagator and nodes for the satellites');
-[parameter] = Create_LEO(conid,'../etc/parameter.xlsx');
+[parameter] = Create_LEO(conid,'../etc/parameter-test.xlsx');
 Create_Fac(conid);
 inc = str2num(parameter{4,1})*dtr;
 
@@ -40,8 +40,8 @@ disp('save delay info');
 for t = 1:cycle
     [delay] = Create_delay(position_cbf,t,inc);
 end
-stkExec( conid, 'Animate Scenario/Matlab_Basic  Reset' );
-stkExec( conid, 'Animate Scenario/Matlab_Basic  Start' );
 
-stkClose(conid)
-stkClose
+
+
+% stkClose(conid)
+% stkClose
